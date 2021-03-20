@@ -2,9 +2,9 @@ package in.rmgx.asset_management.repository;
 
 import in.rmgx.asset_management.models.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.stereotype.Repository;
 
-@RepositoryRestResource(collectionResourceRel = "category", path = "category")
+@Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 
 }
