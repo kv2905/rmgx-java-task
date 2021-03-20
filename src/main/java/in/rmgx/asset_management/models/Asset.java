@@ -29,11 +29,4 @@ public class Asset {
 //    @MapsId
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
-
-    public Asset(String assetName, Date purchasedDate, String conditionNotes, AssignmentStatus assignmentStatus) {
-        this.assetName = assetName;
-        this.purchasedDate = purchasedDate;
-        this.assignmentStatus = assignmentStatus;
-        this.conditionNotes = conditionNotes;
-    }
 }

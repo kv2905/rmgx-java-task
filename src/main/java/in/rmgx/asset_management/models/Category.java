@@ -18,9 +18,4 @@ public class Category {
     private String description;
     @OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "category")
     private Asset asset;
-
-    public Category(String name, String description) {
-        this.categoryName = name;
-        this.description = description;
-    }
 }

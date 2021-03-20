@@ -1,0 +1,6 @@
+insert into category(category_name, description) values ('electronics', 'electronics description')
+insert into category(category_name, description) values ('furniture', 'furniture description')
+insert into asset(asset_name, assignment_status, condition_notes, purchased_date, category_id) values ('laptop', 'ASSIGNED', 'Working fine', '2020-7-21', (select cid from category where category_name='electronics'))
+insert into asset(asset_name, assignment_status, condition_notes, purchased_date, category_id) values ('monitor', 'AVAILABLE', 'Right Click Not Working', '2002-12-2', (select cid from category where category_name='electronics'))
+insert into asset(asset_name, assignment_status, condition_notes, purchased_date, category_id) values ('chair', 'ASSIGNED', 'Ok', '2020-7-21', (select cid from category where category_name='furniture'))
+insert into asset(asset_name, assignment_status, condition_notes, purchased_date, category_id) values ('desk', 'RECOVERED', 'One leg Broken', '2018-3-21', (select cid from category where category_name='furniture'))
