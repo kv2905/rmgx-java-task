@@ -1,6 +1,7 @@
 package in.rmgx.asset_management.service.impl;
 
 import in.rmgx.asset_management.models.Asset;
+import in.rmgx.asset_management.models.AssignmentStatus;
 import in.rmgx.asset_management.repository.AssetRepository;
 import in.rmgx.asset_management.service.AssetService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,15 @@ public class AssetServiceImpl implements AssetService {
     @Override
     public void addAsset(Asset asset) {
         assetRepository.save(asset);
+    }
+
+    @Override
+    public String deleteAsset(Long aid) {
+        Asset asset = getAssetById(aid);
+        if(asset.getAssignmentStatus() == AssignmentStatus.ASSIGNED) {
+            return "Can't delete! The asset is assigned";
+        }
+        assetRepository.delete(asset);
+        return "Deleted";
     }
 }

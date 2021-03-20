@@ -35,4 +35,9 @@ public class AssetRestController {
     public void addOrUpdate(@RequestBody Asset asset) {
         assetService.addAsset(asset);
     }
+
+    @DeleteMapping("/assets/{aid}")
+    public String deleteAsset(@PathVariable(name = "aid")Long aid) {
+        return assetService.deleteAsset(aid);
+    }
 }

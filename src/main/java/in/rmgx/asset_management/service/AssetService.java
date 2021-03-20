@@ -5,7 +5,8 @@ import in.rmgx.asset_management.models.Asset;
 import java.util.List;
 
 public interface AssetService {
-    public List<Asset> getAssets();
-    public Asset getAssetById(Long aid);
-    public void addAsset(Asset asset);
+    List<Asset> getAssets();
+    Asset getAssetById(Long aid);
+    void addAsset(Asset asset);
+    String deleteAsset(Long aid);
 }
