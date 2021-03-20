@@ -16,6 +16,4 @@ public class Category {
     private Long cid;
     private String categoryName;
     private String description;
-    @OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "category")
-    private Asset asset;
 }
