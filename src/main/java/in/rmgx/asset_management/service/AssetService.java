@@ -9,4 +9,5 @@ public interface AssetService {
     Asset getAssetById(Long aid);
     void addAsset(Asset asset);
     String deleteAsset(Long aid);
+    Asset getAssetByName(String name);
 }

@@ -26,6 +26,11 @@ public class AssetRestController {
         return assetService.getAssetById(aid);
     }
 
+    @GetMapping("/assets/search")
+    public Asset getAssetByName(@RequestParam String name) {
+        return assetService.getAssetByName(name);
+    }
+
     @PostMapping("/assets")
     public void addAsset(@RequestBody Asset asset) {
         assetService.addAsset(asset);

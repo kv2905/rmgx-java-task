@@ -45,4 +45,9 @@ public class AssetServiceImpl implements AssetService {
         assetRepository.delete(asset);
         return "Deleted";
     }
+
+    @Override
+    public Asset getAssetByName(String name) {
+        return assetRepository.findByAssetName(name);
+    }
 }
