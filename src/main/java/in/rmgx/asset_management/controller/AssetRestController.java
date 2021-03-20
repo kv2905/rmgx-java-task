@@ -1,6 +1,7 @@
 package in.rmgx.asset_management.controller;
 
 import in.rmgx.asset_management.models.Asset;
+import in.rmgx.asset_management.models.AssignmentStatus;
 import in.rmgx.asset_management.service.AssetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -39,6 +40,24 @@ public class AssetRestController {
     @PutMapping("/assets")
     public void addOrUpdate(@RequestBody Asset asset) {
         assetService.addAsset(asset);
+    }
+
+    @PutMapping("/assets/{aid}")
+    public String updateAssignmentStatus(@PathVariable(name = "aid")Long aid, @RequestParam String assignmentStatus) {
+        Asset asset = assetService.getAssetById(aid);
+        if(!assignmentStatus.equals("ASSIGNED") && !assignmentStatus.equals("RECOVERED")) {
+            return  "Invalid Operation!";
+        }
+        if(assignmentStatus.equals("ASSIGNED") && asset.getAssignmentStatus() == AssignmentStatus.ASSIGNED) {
+            return "Already Assigned!";
+        }
+        if (assignmentStatus.equals("ASSIGNED")) {
+            asset.setAssignmentStatus(AssignmentStatus.ASSIGNED);
+        } else {
+            asset.setAssignmentStatus(AssignmentStatus.RECOVERED);
+        }
+        assetService.addAsset(asset);
+        return "Done!";
     }
 
     @DeleteMapping("/assets/{aid}")
