@@ -21,14 +21,13 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<Category> getCategories() {
-        List<Category> categories = categoryRepository.findAll();
-        return categories;
+        return categoryRepository.findAll();
     }
 
     @Override
     public Category getCategoryById(Long cid) {
-        Optional<Category> c = categoryRepository.findById(cid);
-        return c.get();
+        Optional<Category> category = categoryRepository.findById(cid);
+        return category.get();
     }
 
     @Override

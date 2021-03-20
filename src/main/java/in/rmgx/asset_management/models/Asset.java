@@ -25,8 +25,7 @@ public class Asset {
     @Enumerated(EnumType.STRING)
     private AssignmentStatus assignmentStatus;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-//    @MapsId
-    @JoinColumn(name = "category_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "category_id")
     private Category category;
 }

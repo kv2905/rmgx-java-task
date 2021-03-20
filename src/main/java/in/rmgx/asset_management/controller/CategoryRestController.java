@@ -18,8 +18,7 @@ public class CategoryRestController {
 
     @GetMapping("/categories")
     public List<Category> getCategories() {
-        List<Category> categories = categoryService.getCategories();
-        return categories;
+        return categoryService.getCategories();
     }
 
     @GetMapping("/categories/{cid}")
