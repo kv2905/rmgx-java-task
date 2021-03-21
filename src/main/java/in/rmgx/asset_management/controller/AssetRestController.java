@@ -49,9 +49,9 @@ public class AssetRestController {
         }
     }
 
-    @DeleteMapping("/assets/{aid}")
-    public ResponseEntity<String> deleteAsset(@PathVariable(name = "aid")Long aid) {
-        if (assetService.deleteAsset(aid)) {
+    @DeleteMapping("/delete/{assetId}")
+    public ResponseEntity<String> deleteAsset(@PathVariable(name = "assetId")Long assetId) {
+        if (assetService.deleteAsset(assetId)) {
             return ResponseEntity.ok().body("Deleted successfully");
         } else {
             return ResponseEntity.badRequest().body("Can't be Deleted! The asset is assigned!");
