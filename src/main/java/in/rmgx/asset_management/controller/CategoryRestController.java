@@ -8,30 +8,27 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/categories")
 public class CategoryRestController {
     @Autowired
     private CategoryService categoryService;
 
-    public void setCategoryService(CategoryService categoryService) {
-        this.categoryService = categoryService;
-    }
-
-    @GetMapping("/categories")
+    @GetMapping("/")
     public List<Category> getCategories() {
         return categoryService.getCategories();
     }
 
-    @GetMapping("/categories/{cid}")
+    @GetMapping("/{cid}")
     public Category getCategoryById(@PathVariable(name = "cid")Long cid) {
         return categoryService.getCategoryById(cid);
     }
 
-    @PostMapping("/categories")
+    @PostMapping("/add")
     public void addCategory(@RequestBody Category category) {
         categoryService.addCategory(category);
     }
 
-    @PutMapping("/categories")
+    @PutMapping("/update")
     public void addOrUpdateCategory(@RequestBody Category category) {
         categoryService.addCategory(category);
     }
