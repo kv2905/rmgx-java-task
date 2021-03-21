@@ -1,67 +1,60 @@
 package in.rmgx.asset_management.controller;
 
 import in.rmgx.asset_management.models.Asset;
-import in.rmgx.asset_management.models.AssignmentStatus;
 import in.rmgx.asset_management.service.AssetService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/assets")
 public class AssetRestController {
     @Autowired
     AssetService assetService;
 
-    public void setAssetService(AssetService assetService) {
-        this.assetService = assetService;
-    }
-
-    @GetMapping("/assets")
+    @GetMapping("/")
     public List<Asset> getAssets() {
         return assetService.getAssets();
     }
 
-    @GetMapping("/assets/{aid}")
-    public Asset getAssetById(@PathVariable(name = "aid")Long aid) {
-        return assetService.getAssetById(aid);
+    @GetMapping("/{assetId}")
+    public Asset getAssetById(@PathVariable(name = "assetId")Long assetId) {
+        return assetService.getAssetById(assetId);
     }
 
-    @GetMapping("/assets/search")
+    @GetMapping("/search")
     public Asset getAssetByName(@RequestParam String name) {
         return assetService.getAssetByName(name);
     }
 
-    @PostMapping("/assets")
+    @PostMapping("/add")
     public void addAsset(@RequestBody Asset asset) {
         assetService.addAsset(asset);
     }
 
-    @PutMapping("/assets")
+    @PutMapping("/update")
     public void addOrUpdate(@RequestBody Asset asset) {
         assetService.addAsset(asset);
     }
 
-    @PutMapping("/assets/{aid}")
-    public String updateAssignmentStatus(@PathVariable(name = "aid")Long aid, @RequestParam String assignmentStatus) {
-        Asset asset = assetService.getAssetById(aid);
-        if(!assignmentStatus.equals("ASSIGNED") && !assignmentStatus.equals("RECOVERED")) {
-            return  "Invalid Operation!";
-        }
-        if(assignmentStatus.equals("ASSIGNED") && asset.getAssignmentStatus() == AssignmentStatus.ASSIGNED) {
-            return "Already Assigned!";
-        }
-        if (assignmentStatus.equals("ASSIGNED")) {
-            asset.setAssignmentStatus(AssignmentStatus.ASSIGNED);
+    @PutMapping("/assign/{assetId}")
+    public ResponseEntity<String> updateAssignmentStatus(@PathVariable(name = "assetId")Long asssetId, @RequestParam String assignmentStatus) {
+        //check if asset is assigned or not
+        if(assetService.updateAssignmentStatus(asssetId, assignmentStatus)){
+            return ResponseEntity.ok().body("Updated successfully");
         } else {
-            asset.setAssignmentStatus(AssignmentStatus.RECOVERED);
+            return ResponseEntity.badRequest().body("Invalid Operation");
         }
-        assetService.addAsset(asset);
-        return "Done!";
     }
 
     @DeleteMapping("/assets/{aid}")
-    public String deleteAsset(@PathVariable(name = "aid")Long aid) {
-        return assetService.deleteAsset(aid);
+    public ResponseEntity<String> deleteAsset(@PathVariable(name = "aid")Long aid) {
+        if (assetService.deleteAsset(aid)) {
+            return ResponseEntity.ok().body("Deleted successfully");
+        } else {
+            return ResponseEntity.badRequest().body("Can't be Deleted! The asset is assigned!");
+        }
     }
 }

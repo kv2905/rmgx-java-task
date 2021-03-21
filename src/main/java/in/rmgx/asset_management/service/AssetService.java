@@ -6,8 +6,9 @@ import java.util.List;
 
 public interface AssetService {
     List<Asset> getAssets();
-    Asset getAssetById(Long aid);
-    void addAsset(Asset asset);
-    String deleteAsset(Long aid);
+    Asset getAssetById(Long assetId);
     Asset getAssetByName(String name);
+    void addAsset(Asset asset);
+    boolean deleteAsset(Long assetId);
+    boolean updateAssignmentStatus(Long assetId, String assignmentStatus);
 }

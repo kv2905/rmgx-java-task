@@ -14,7 +14,7 @@ import java.util.Date;
 public class Asset {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long aid;
+    private Long assetId;
     private String assetName;
 
     @Temporal(TemporalType.DATE)
@@ -23,7 +23,7 @@ public class Asset {
     private String conditionNotes;
 
     @Enumerated(EnumType.STRING)
-    private AssignmentStatus assignmentStatus;
+    private AssignmentStatus assignmentStatus = AssignmentStatus.AVAILABLE;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
